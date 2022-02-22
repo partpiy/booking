@@ -41,7 +41,7 @@ public class BookingService {
 	private TheatreRepo theatreRepo;
 	
 	@Autowired
-	private MovieScheduleRepo movieScheduleRepo;
+	private ShowRepo showRepo;
 	
 	@Transactional
 	public BookingResponse book(BookingRequest bookingRequest) {
@@ -73,6 +73,6 @@ public class BookingService {
 	public List<Show> getAllTheatres(Long movieId, Long cityId, LocalDate date){
 		List<Theatre> cityTheatres = theatreRepo.findByCityId(cityId);
 		List<Long> theatreIds = cityTheatres.stream().map(t -> t.getId()).collect(Collectors.toList());
-		return ShowRepo.
-	}mapToLong
+		return showRepo.findByTheatreIdMovieIdDateTime(theatreIds, movieId, date);
+	}
 }
